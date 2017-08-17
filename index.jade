@@ -1,0 +1,39 @@
+div(class="chapter inactive",id="main")
+  h1(class="title text_center") ADY
+  h1(class="author text_center") Jorge Hernández
+
+div(class="chapter inactive", id="index")
+  h1 Índice
+
+  ol.index
+    li
+      a(href="#parte-1", class="index-item", data-id="parte-1") Parte 1
+      ol.index
+        for chapter, slug in public.chapters.parte1._data
+          li 
+            a(href="#"+slug, class="index-item", data-id=slug) #{ chapter.title }
+    li
+      a(href="#parte-2", class="index-item", data-id="parte-2") Parte 2
+      ol.index
+        for chapter, slug in public.chapters.parte2._data
+          li 
+            a(href="#"+slug, class="index-item", data-id=slug) #{ chapter.title }
+  
+div(class="chapter inactive", id="parte-1")
+  h1 Parte 1
+  != partial("chapters/parte1/parte-1")
+
+for chapter, slug in public.chapters.parte1._data
+  div(class="chapter inactive", id="#{ slug }")
+    != partial("chapters/parte1/" + slug)
+
+div(class="chapter inactive", id="parte-2")
+  != partial("chapters/parte2/parte-2")
+
+for chapter, slug in public.chapters.parte2._data
+  div(class="chapter inactive", id="#{ slug }")
+    != partial("chapters/parte2/" + slug)
+
+div#control
+  a#arrow-left(class="arrow",href="#") &nbsp;
+  a#arrow-right(class="arrow",href="#") &nbsp;
