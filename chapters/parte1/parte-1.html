@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="es"><head><title>ADY :: Jorge Hernández</title><meta charset="utf8"/><meta name="author" content="Jorge Hernández"/><meta name="description" content="Pruebas"/><meta name="handheldfriendly" content="true"/><meta name="mobileoptimized" content="320"/><meta name="theme-color" content="#000"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="cleartype" content="on"/><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><link rel="stylesheet" href="./css/main.css"/><!--!= partial("includes/analytics")--></head><body><h3 class="sofia text_left">Dedicatoria para el amante de mi alma.</h3><blockquote><p>El día que estaba mas locamente enamorado de ti y sentía el amor refulgante que despertaba en mi un sin fin de esperanzas y alegrías...</p></blockquote><script>var origin = window.location.href.split("#")[0];
+var items = document.getElementsByClassName("index-item");
+var arrow_left = document.getElementById("arrow-left");
+var arrow_right = document.getElementById("arrow-right");
+var chapters = Array();
+    chapters.push("main");
+    chapters.push("index");
+
+for(i=0; i<items.length; i++){
+  var item = items[i];
+  var name = item.getAttribute("data-id");
+  chapters.push(name);
+  item.onclick = function(){
+    var _name_ = this.getAttribute("data-id");
+    onChangePage(_name_);
+    window.location.href = origin + "#" + _name_;
+    return false;
+  }
+}
+
+var _arrows_ = function(){
+  var name = this.getAttribute("href").substring(1, this.getAttribute("href").length);
+  onChangePage(name);
+  window.location.href = origin + "#" + name;
+  return false;
+}
+
+arrow_left.onclick = _arrows_;
+arrow_right.onclick = _arrows_;
+
+function onChangePage(name){
+  var current = chapters.indexOf(name);
+
+  if(i<0){
+    return;
+  }
+
+  for(i=0; i<chapters.length; i++){
+    var item = document.getElementById(chapters[i]);
+    if(item != null){
+        if(!item.classList.contains('inactive')){
+          item.classList.add('inactive');
+        }
+    }
+  }
+
+  var page = document.getElementById(name);
+      page.classList.remove("inactive");
+
+  if(current > 0){
+    arrow_left.setAttribute("href", "#" + chapters[current-1]);
+  }
+  else{
+    arrow_left.setAttribute("href", "#" + chapters[0]);
+  }
+  if(current+1 < chapters.length){
+    arrow_right.setAttribute("href","#" + chapters[current+1]);
+  }
+  
+}
+
+document.addEventListener("keydown", function(e){
+  switch(e.keyCode){
+    case 37:
+      arrow_left.onclick();
+      break;
+    case 39:
+      arrow_right.onclick();
+      break;
+  }
+});
+
+window.onload = function(){
+  var name = window.location.href.split("#")[1];
+  var i = chapters.indexOf(name);
+  if(i<0){
+    i = 0;
+    window.location.href = origin + "#" + chapters[i];
+  }
+  onChangePage(chapters[i]);
+}</script></body></html>
