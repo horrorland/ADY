@@ -1,6 +1,6 @@
 # Indice
 
-- [Intro](Indice.md)
+- [Intro](README.md)
 - [Parte 1](Parte-1/Parte-1.md)
   - [Capítulo 1](Parte-1/Capitulo-1.md)
   - [Capítulo 2](Parte-1/Capitulo-2.md)
